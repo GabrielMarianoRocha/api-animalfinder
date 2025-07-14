@@ -6,8 +6,23 @@ from uuid import uuid4
 from PIL import Image, ImageDraw, ImageFont
 from megadetector.detection.run_detector_batch import load_and_run_detector_batch
 from classificador import classify_animal
+import os
+from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+UPLOAD_DIR = '/tmp/uploads'
+OUTPUT_DIR = '/tmp/output'
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 UPLOAD_DIR = './ImageDetector/uploads'
 OUTPUT_DIR = './ImageDetector/output'
