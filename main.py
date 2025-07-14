@@ -31,6 +31,11 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 colors = {'animal': 'red', 'pessoa': 'blue', 'veículo': 'green'}
 
+@app.get("/")
+def home():
+    return {"message": "API do Animal Finder está rodando!"}
+
+
 @app.post("/detectar")
 async def detectar(file: UploadFile = File(...)):
     image_id = str(uuid4())
